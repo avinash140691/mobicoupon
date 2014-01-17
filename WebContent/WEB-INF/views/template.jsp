@@ -8,7 +8,7 @@
 </head>
 <div class="container">
 	<div class="header">
-		<jsp:include page="header.jsp"></jsp:include>
+		<jsp:include page="adminheader.jsp"></jsp:include>
 		<div class="d_form">
 			//content
 		</div>

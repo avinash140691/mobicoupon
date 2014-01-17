@@ -9,27 +9,47 @@
 	$(document).ready(function() {
 		$("#addDept").click(function() {
 			$('#deptAddForm').css('display', 'block');
-			$('#deptEditForm').css('display', 'none');
+			$('#editDept').css('display', 'none');
 		});
 
-		$("#editDept").click(function() {
+		$("#editDeptButton").click(function() {
 			$('#deptAddForm').css('display', 'none');
-			$('#deptEditForm').css('display', 'block');
+			$('#editDept').css('display', 'block');
 
 			var id = $('select').val();
 			var name = $.trim($('select option:selected').html());
-
-			$("#did").val(id);
-			$("#dname").val(name);
+			alert(id +" : "+ name );
+			$("#editDept #deptId").val(id);
+			$("#editDept #deptName").val(name);
 		});
 		
 		$("#removeDept").click(function(){
 			var id = $('select').val();
 			var name =$.trim( $('select option:selected').html());
-			alert('delete this dept'  +  name);
-			window.top.location = '<c:url value="/admin/removeDept" />?id='+id;
+			var removeDeptConfirm = confirm("Do you want to remove '" +name + "'?");
+			if(removeDeptConfirm)
+				window.top.location = '<c:url value="/admin/removeDept" />?id='+id;
 		});
-
+		
+		<c:if test="${not empty errors}">
+			$('#deptAddForm').css('display', 'block');
+			$('#editDept').css('display', 'none');
+			<c:forEach items="${errors}" var="fieldError">
+				var id1 = '#${fieldError.field}';
+				var msg1 = '${fieldError.defaultMessage}';
+				$(id1).after("<span style='color:red'>" + msg1 + "</span>");
+			</c:forEach>
+		</c:if>
+		
+		<c:if test="${not empty editErrors}">
+			$('#deptAddForm').css('display', 'none');
+			$('#editDept').css('display', 'block');
+			<c:forEach items="${editErrors}" var="fieldError">
+				var id2 = '#editDept #${fieldError.field}';
+				var msg2 = '${fieldError.defaultMessage}';
+				$(id2).after("<span style='color:red'>" + msg2 + "</span>");
+			</c:forEach>
+		</c:if>
 	});
 </script>
 <link href='<c:url value="/web/css/style.css"></c:url>' rel="stylesheet"
@@ -51,23 +71,23 @@
 									<option value="${depts.deptId}">${depts.deptName}</option>
 								</c:forEach>
 						</select> <br /> <br /> <input type="button" value="AddDept" id="addDept" />
-							&nbsp; &nbsp; <input type="button" value="EditDept" id="editDept" />
+							&nbsp; &nbsp; <input type="button" value="EditDept" id="editDeptButton" />
 							&nbsp; &nbsp; <input type="button" value="RemoveDept"
-							id="removeDept" /><br /> <br />
+							id="removeDept" /><span style="color:red">${error}</span><br /> <br />
 
 							<form autocomplete="off"
 								action='<c:url value="/admin/addDept"></c:url>'
-								style="display: none" id="deptAddForm" method="post">
-								Dept Name: <input type="text" name="deptName" /> <br /> <br />
+								style="display: none" id="deptAddForm" method="post" name="deptForm">
+								Dept Name: <input type="text" name="deptName" id="deptName" /> <br /> <br />
 								<input type="submit" value="Add" /> &nbsp; &nbsp; <input
 									type="reset" value="clear" />
 							</form>
 							<form autocomplete="off"
 								action='<c:url value="/admin/editDept"></c:url>'
-								style="display: none" id="deptEditForm" method="post">
-								Dept Id: <input type="text" name="deptId" id="did" readonly />
+								style="display: none" id="editDept" method="post" name="editDept">
+								Dept Id: <input type="text" name="deptId" id="deptId" readonly />
 								<br /> <br /> Dept Name: <input type="text" name="deptName"
-									id="dname" /> <br /> <br /> <input type="submit"
+									id="deptName" /> <br /> <br /> <input type="submit"
 									value="Update" /> &nbsp; &nbsp; <input type="reset"
 									value="clear" />
 							</form>

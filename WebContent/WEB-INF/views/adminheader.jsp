@@ -40,7 +40,7 @@
 						<li class="subdown select2"><a style="color: #FFF;"
 							href='<c:url value="/admin/designation"></c:url>' >Designation</a></li>
 						<li class="subdown select3"><a style="color: #FFF;"
-							href="product.jsp">Product</a></li>
+							href='<c:url value="/admin/product" />'>Product</a></li>
 						<li class="subdown select4"><a style="color: #FFF;"
 							href="subproduct.jsp">Sub Product</a></li>
 						<li class="subdown select5"><a style="color: #FFF;"
