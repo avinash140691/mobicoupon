@@ -1,4 +1,4 @@
-package com.mobicoupon.daoimpl;
+ package com.mobicoupon.daoimpl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -61,5 +61,7 @@ public class DesignationDaoImpl implements DesignationDao {
 		int count = template.update(query, new Object[]{id});
 		return count;
 	}
+	
+	
 
 }

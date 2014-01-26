@@ -1,0 +1,23 @@
+.tableclass {
+	border-collapse: collapse ;
+}
+
+.tableclass tr {
+	border: 1px solid #000000;
+	background: #f3f3f3;
+}
+
+.tableclass tr td {
+	border: 1px solid #000000;
+	padding: 3px;
+	color:#6666FF;
+}
+
+.tableclass th {
+	color:#900000;
+}
+
+.tableclass th {
+	border:1px solid #DD2F2F;
+	padding: 3px;
+}

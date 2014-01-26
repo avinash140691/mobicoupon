@@ -6,7 +6,10 @@ import com.mobicoupon.daoimpl.DepartmentBean;
 
 public interface DepartmentDao {
 	public List<DepartmentBean> getDepartments();
+
 	public void addDept(DepartmentBean bean);
+
 	public void editDept(DepartmentBean editBean);
+
 	public void removeDept(String id);
 }

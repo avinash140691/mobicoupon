@@ -15,7 +15,7 @@
 				class="imagedropshadow" /></a><a href="#"><img
 				src='<c:url value="/web/images/24b.png"></c:url>' alt="Myspace"
 				width="24" height="24" border="0" class="imagedropshadow" /></a><a
-				href="#"><img src=alt= "Digg" width="24" height="24" border="0"
+				href="#"><img src='<c:url value="/web/images/google.jpg" />' alt="Digg" width="24" height="24" border="0"
 				class="imagedropshadow" /></a><a href="#"><img
 				src='<c:url value="/web/images/linked.jpg"></c:url>' alt="Digg"
 				width="24" height="24" border="0" class="imagedropshadow" /></a><a
@@ -40,11 +40,11 @@
 						<li class="subdown select2"><a style="color: #FFF;"
 							href='<c:url value="/admin/designation"></c:url>' >Designation</a></li>
 						<li class="subdown select3"><a style="color: #FFF;"
-							href='<c:url value="/admin/product" />'>Product</a></li>
+							href='<c:url value="/admin/viewProduct" />'>Product</a></li>
 						<li class="subdown select4"><a style="color: #FFF;"
-							href="subproduct.jsp">Sub Product</a></li>
+							href='<c:url value="/admin/viewSubProduct"></c:url>'>Sub Product</a></li>
 						<li class="subdown select5"><a style="color: #FFF;"
-							href="subchildproduct.jsp">Sub Child product</a></li>
+							href='<c:url value="/admin/viewSubSubProduct" />'>Sub Child product</a></li>
 					</ul></li>
 			</ul>
 			<ul id="menu-bar" style="float: left; padding-left: 0.7%;">

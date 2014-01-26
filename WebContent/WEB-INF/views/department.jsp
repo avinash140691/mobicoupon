@@ -4,7 +4,6 @@
 <head>
 <title>Department Form</title>
 <script src='<c:url value="/web/js/jquery.min.js"></c:url>'></script>
-<script src='<c:url value="/web/js/script.js"></c:url>'></script>
 <script>
 	$(document).ready(function() {
 		$("#addDept").click(function() {
