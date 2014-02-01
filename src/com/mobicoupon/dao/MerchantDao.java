@@ -1,16 +1,21 @@
 package com.mobicoupon.dao;
 
-import java.util.List;
 
-import com.mobicoupon.bean.MerchantBean;
+ import java.util.List;
+
+import com.mobicoupon.bean.DdmBean;
+import com.mobicoupon.bean.MerchantAddBean;
+import com.mobicoupon.bean.MerchantBean4Edit;
 
 public interface MerchantDao {
 	
-	public int addMerchant(MerchantBean merchantBean);
+	public int addMerchant(MerchantAddBean merchantBean);
 	
-	public int editMerchant(MerchantBean merchantBean);
+	public int editMerchant(MerchantBean4Edit merchantBean);
 	
-	public List<MerchantBean> viewMerchant();
+	public List<DdmBean> viewMerchant(int merchantId);
 	
 	public int deleteMerchant(String merchantId);
+	
+	public List<MerchantBean4Edit> PartOfView();
  }

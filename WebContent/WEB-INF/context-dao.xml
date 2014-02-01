@@ -31,8 +31,14 @@
 			<value>${database.password}</value>
 		</property>
 	</bean>
+	
+	<tx:annotation-driven transaction-manager="transactionManager" />
+ 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+  		<property name="dataSource" ref="dataSource" />
+ 	</bean>
 
 	<bean id="template" class="org.springframework.jdbc.core.JdbcTemplate">
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
+	
 </beans>

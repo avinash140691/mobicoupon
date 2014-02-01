@@ -1,11 +1,9 @@
 package com.mobicoupon.bean;
 
-
 import org.hibernate.validator.constraints.NotBlank;
 
-public class MerchantBean {
+public class MerchantAddBean {
 	
-	private int merchantId;
 	@NotBlank
 	private String merchantName;
 	@NotBlank
@@ -32,38 +30,6 @@ public class MerchantBean {
 	private  String password;
 	@NotBlank
 	private String authority;
-	@NotBlank
-	private String  deptName;
-	@NotBlank
-	private String desgName;
-	
-	
-	public int getMerchantId() {
-		return merchantId;
-	}
-	
-	public void setMerchantId(int merchantId) {
-		this.merchantId = merchantId;
-	}
-	
-	public String getUserName() {
-		return userName;
-	}
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	public String getAuthority() {
-		return authority;
-	}
-	public void setAuthority(String authority) {
-		this.authority = authority;
-	}
 	public String getMerchantName() {
 		return merchantName;
 	}
@@ -124,21 +90,23 @@ public class MerchantBean {
 	public void setPersonalContactNum(String personalContactNum) {
 		this.personalContactNum = personalContactNum;
 	}
-
-	public String getDeptName() {
-		return deptName;
+	public String getUserName() {
+		return userName;
 	}
-
-	public void setDeptName(String deptName) {
-		this.deptName = deptName;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
-
-	public String getDesgName() {
-		return desgName;
+	public String getPassword() {
+		return password;
 	}
-
-	public void setDesgName(String desgName) {
-		this.desgName = desgName;
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getAuthority() {
+		return authority;
+	}
+	public void setAuthority(String authority) {
+		this.authority = authority;
 	}
 	
 	

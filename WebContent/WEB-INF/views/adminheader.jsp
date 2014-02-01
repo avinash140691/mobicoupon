@@ -53,9 +53,9 @@
 					<ul class="submenus"
 						style="margin-top: 0px; margin-right: -50px; width: 96%; z-index: 6; margin-left: 0;">
 						<li class="subdowns select"><a style="color: #FFF;"
-							href="merchantreg.html">Create Merchant</a></li>
+							href='<c:url value="/admin/add"></c:url>' >Create Merchant</a></li>
 						<li class="subdowns select2"><a style="color: #FFF;"
-							href="merchantdetails.jsp">View Merchant</a></li>
+							href='<c:url value="/admin/partOfView"></c:url>'>View Merchant</a></li>
 					</ul></li>
 			</ul>
 			<ul class="ucreation" id="menu-bar"
@@ -65,7 +65,7 @@
 					<ul class="submenus3"
 						style="margin-top: 0px; margin-right: -50px; width: 96%; z-index: 6; margin-left: 0;">
 						<li class="subdowns3 vusers"><a style="color: #FFF;"
-							href="adminviewUser.jsp">View Users</a></li>
+							href='<c:url value="/admin/userView"></c:url>'>View Users</a></li>
 						<li class="subdowns3 cusers"><a style="color: #FFF;"
 							href="adminuserCreation.jsp">Create Users</a></li>
 					</ul></li>

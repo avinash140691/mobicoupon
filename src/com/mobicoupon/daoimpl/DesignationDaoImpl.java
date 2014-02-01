@@ -19,7 +19,9 @@ public class DesignationDaoImpl implements DesignationDao {
 
 	@Override
 	public List<DesignationBean> viewDesignations() {
+		
 		String query = "select desg_id,desg_name from designation";
+		
 		List<DesignationBean> designationBean = template.query(query,
 				new RowMapper<DesignationBean>() {
 
@@ -39,26 +41,31 @@ public class DesignationDaoImpl implements DesignationDao {
 
 	@Override
 	public int editDesignation(DesignationBean bean) {
+		
 		int desgId = bean.getDesgId();
 		String desgName = bean.getDesgName();
 		String query = "update designation set desg_name=? where desg_id=?";
 		int count = template.update(query, new Object[] { desgName, desgId });
+		
 		return count;
 	}
 
 	@Override
 	public int addDesignation(DesignationBean bean) {
+		
 		String desg = bean.getDesgName();
-		System.out.println(desg);
 		String query = "insert into designation(desg_name) values(?)";
 		int count = template.update(query, new Object[] { desg });
+		
 		return count;
 	}
 
 	@Override
 	public int deleteDesignation(String id) {
+		
 		String query = "delete from designation where desg_id=?";
 		int count = template.update(query, new Object[]{id});
+		
 		return count;
 	}
 	
