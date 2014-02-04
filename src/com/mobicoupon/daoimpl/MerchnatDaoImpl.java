@@ -6,7 +6,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -238,6 +240,87 @@ public class MerchnatDaoImpl implements MerchantDao {
 		
 		
 	}
+
+	@Override
+	public int mobileView(String mobile) {
+		
+		String mobileQuery = "select count(*) from merchant where mobile = ?";
+		
+		Integer count = jdbcTemplate.query(mobileQuery, new Object[]{mobile}, new ResultSetExtractor<Integer>(){
+
+			@Override
+			public Integer extractData(ResultSet rs) throws SQLException, DataAccessException {
+				if(rs.next())
+					return rs.getInt(1);
+				return -1;
+			}
+			
+		});
+		return count.intValue();
+	}
+
+	@Override
+	public int landlLineView(String landline) {
+		
+		String landlineQuery = "select count(*) from merchant where landline= ?";
+		
+		Integer count = jdbcTemplate.query(landlineQuery,new Object[]{landline},new ResultSetExtractor<Integer>(){
+
+			@Override
+			public Integer extractData(ResultSet rs) throws SQLException,DataAccessException {
+				
+				if(rs.next())
+					return rs.getInt(1);
+				
+				return -1;
+			}
+			
+		});
+		
+		return count.intValue();
+	}
+
+	@Override
+	public int emailView(String email) {
+		String emailQuery = "select count(*) from merchant where corporate_email_id = ?";
+	
+		Integer count = jdbcTemplate.query(emailQuery,new Object[]{email},new ResultSetExtractor<Integer>(){
+
+			@Override
+			public Integer extractData(ResultSet rs) throws SQLException,DataAccessException {
+			
+				if(rs.next())
+					return rs.getInt(1);
+			
+				return -1;
+			}
+		
+	});
+	
+	return count.intValue();
+
+	}
+
+	@Override
+	public int personalContactView(String personalContactNum) {
+		
+		String pcQuery = "select personal_contact_num from merchant";
+		
+		Integer count = jdbcTemplate.query(pcQuery,new ResultSetExtractor<Integer>(){
+
+			@Override
+			public Integer extractData(ResultSet rs) throws SQLException,DataAccessException {
+				
+				if(rs.next())
+					return rs.getInt(1);
+				
+				return -1;
+			}
+			
+		});
+		return count;
+	}
+
 
 
 }

@@ -132,7 +132,7 @@ CREATE TABLE `login` (
   `authority` varchar(30) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -141,7 +141,7 @@ CREATE TABLE `login` (
 
 LOCK TABLES `login` WRITE;
 /*!40000 ALTER TABLE `login` DISABLE KEYS */;
-INSERT INTO `login` VALUES (1,'pranaychenna@gmail.com','pranay','ROLE_ADMIN'),(8,'pranay@reliance.com','pranay','ROLE_MERCHANT'),(9,'teja@nimbus.com','teja','ROLE_MERCHANT');
+INSERT INTO `login` VALUES (1,'pranaychenna@gmail.com','pranay','ROLE_ADMIN'),(8,'pranay@reliance.com','pranay','ROLE_MERCHANT');
 /*!40000 ALTER TABLE `login` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -167,7 +167,8 @@ CREATE TABLE `merchant` (
   PRIMARY KEY (`merchant_id`),
   UNIQUE KEY `landline` (`landline`),
   UNIQUE KEY `corporate_email_id` (`corporate_email_id`),
-  UNIQUE KEY `company_name` (`company_name`),
+  UNIQUE KEY `mobile` (`mobile`),
+  UNIQUE KEY `personal_contact_num` (`personal_contact_num`),
   KEY `desg_id` (`desg_id`),
   KEY `dept_id` (`dept_id`),
   CONSTRAINT `merchant_ibfk_2` FOREIGN KEY (`desg_id`) REFERENCES `designation` (`desg_id`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -178,7 +179,7 @@ CREATE TABLE `merchant` (
   CONSTRAINT `merchant_ibfk_7` FOREIGN KEY (`merchant_id`) REFERENCES `login` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `merchant_ibfk_8` FOREIGN KEY (`merchant_id`) REFERENCES `login` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `merchant_ibfk_9` FOREIGN KEY (`merchant_id`) REFERENCES `login` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -187,7 +188,7 @@ CREATE TABLE `merchant` (
 
 LOCK TABLES `merchant` WRITE;
 /*!40000 ALTER TABLE `merchant` DISABLE KEYS */;
-INSERT INTO `merchant` VALUES (8,'pranay','bombey',10,938218347,20,'pranay@reliance.com','www.reliance.com','reliance','9999999','4893498'),(9,'teja','bombey',9,3243535,18,'teja@nimbus.com','www.teja.com','nimbu','87437489','9877828738');
+INSERT INTO `merchant` VALUES (8,'pranay','bombey',10,938218347,20,'pranay@reliance.com','www.reliance.com','reliance','9999999','4893498');
 /*!40000 ALTER TABLE `merchant` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -202,7 +203,7 @@ CREATE TABLE `product` (
   `product_id` int(11) NOT NULL AUTO_INCREMENT,
   `product_name` varchar(80) NOT NULL,
   PRIMARY KEY (`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -211,7 +212,7 @@ CREATE TABLE `product` (
 
 LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
-INSERT INTO `product` VALUES (21,'two wheeler'),(22,'tablets');
+INSERT INTO `product` VALUES (22,'tablets'),(23,'pranay');
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -259,7 +260,7 @@ CREATE TABLE `sub_product` (
   PRIMARY KEY (`sub_product_id`),
   KEY `product_id` (`product_id`),
   CONSTRAINT `sub_product_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -268,7 +269,7 @@ CREATE TABLE `sub_product` (
 
 LOCK TABLES `sub_product` WRITE;
 /*!40000 ALTER TABLE `sub_product` DISABLE KEYS */;
-INSERT INTO `sub_product` VALUES (21,10,'bikes'),(22,12,'akash'),(21,16,'tvs'),(21,17,'bajaj'),(21,18,'hero');
+INSERT INTO `sub_product` VALUES (22,12,'akash');
 /*!40000 ALTER TABLE `sub_product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -286,7 +287,7 @@ CREATE TABLE `sub_sub_product` (
   PRIMARY KEY (`sub_sub_product_id`),
   KEY `sub_product_id` (`sub_product_id`),
   CONSTRAINT `sub_sub_product_ibfk_1` FOREIGN KEY (`sub_product_id`) REFERENCES `sub_product` (`sub_product_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -295,7 +296,7 @@ CREATE TABLE `sub_sub_product` (
 
 LOCK TABLES `sub_sub_product` WRITE;
 /*!40000 ALTER TABLE `sub_sub_product` DISABLE KEYS */;
-INSERT INTO `sub_sub_product` VALUES (10,9,'Honda'),(16,10,'apache');
+INSERT INTO `sub_sub_product` VALUES (12,11,'dnkjsahd');
 /*!40000 ALTER TABLE `sub_sub_product` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -318,7 +319,7 @@ CREATE TABLE `user` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `mobile` (`mobile`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -340,4 +341,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-02-01 12:59:08
+-- Dump completed on 2014-02-04 18:51:14

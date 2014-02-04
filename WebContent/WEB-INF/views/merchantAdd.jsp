@@ -24,6 +24,24 @@
 						alert("${error}");
 					</c:forEach>
 				</c:if>
+				
+				<c:if test="${not empty emailError}">
+					$("#corporateEmailId").after("<span style='color:red'> ${emailError} </span>");
+				</c:if>
+				
+				
+				<c:if test="${not empty landLineError}">
+					$("#landLine").after("<span style='color:red'> ${landLineError} </span>");
+				</c:if>
+				
+				<c:if test="${not empty mobileError}">
+					$("#mobile").after("<span style='color:red'> ${mobileError} </span>");
+				</c:if>
+				
+				<c:if test="${not empty pContactError}" >
+					$("#personalContactNum").after("<span style='color:red' > ${pContactError} </span>");
+				</c:if>
+				
 			});
 		</script>
 		

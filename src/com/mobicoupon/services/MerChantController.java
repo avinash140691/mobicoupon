@@ -43,12 +43,46 @@ public class MerChantController {
 	public String addMerchnat(@ModelAttribute("addForm") @Valid MerchantAddBean merchantBean ,
 			BindingResult result,RedirectAttributes rtAttributes){
 		
+		
 		if(result.hasErrors()){
 			
 			List<FieldError> fieldErrors = result.getFieldErrors(); 
 			rtAttributes.addFlashAttribute("addFormErrors", fieldErrors);
 			return "redirect:/admin/add";
 		}
+		
+		String corporateEmailId = merchantBean.getCorporateEmailId(); 
+		String landLine = merchantBean.getLandLine();  
+		String mobile = merchantBean.getMobile();
+		String personalContactNum = merchantBean.getPersonalContactNum();
+	  	boolean isError = false;
+	  	
+		int emailView = merchantDao.emailView(corporateEmailId);  
+		if(emailView >= 1){
+			isError = true;
+			rtAttributes.addFlashAttribute("emailError", "Choose another email Id " + corporateEmailId  +" already exist");
+		}
+		
+		int landLineView = merchantDao.landlLineView(landLine);  
+		if(landLineView >= 1){
+			isError = true;
+			rtAttributes.addFlashAttribute("landLineError", "Choose another Phone num "+ landLine +" already exist");
+		}
+		
+		int mobileView = merchantDao.mobileView(mobile);   
+		if(mobileView >= 1){
+			isError = true;
+			rtAttributes.addFlashAttribute("mobileError", "Choose another Phone num "+mobile +" already exist");
+		}
+		
+		int personalContactView = merchantDao.personalContactView(personalContactNum); 
+		if(personalContactView >= 1){
+			isError = true;
+			rtAttributes.addFlashAttribute("pContactError", "Choose another Phone num "+ personalContactNum  +" already exist");
+		}
+		
+		if(isError)
+			return "redirect:/admin/add";
 		
 		int addMerchant = merchantDao.addMerchant(merchantBean);
 		

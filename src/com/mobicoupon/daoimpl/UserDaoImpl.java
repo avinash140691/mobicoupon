@@ -35,6 +35,7 @@ public class UserDaoImpl implements UserDao {
 						+ 	"values(?,?,?,?,?,?,?)";
 		
 		int update = template.update(query,new Object[]{name,company,designation,mobile,email,userName,password});
+		
 		return update;
 	}
 

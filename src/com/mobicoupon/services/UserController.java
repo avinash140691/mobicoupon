@@ -35,8 +35,10 @@ public class UserController {
 			rtAttributes.addFlashAttribute("addFormErrors", fieldErrors);
 			return "redirect:/admin/userView";
 		}
-		
+	
 		userDao.add(userBean);
+		
+			
 		
 		return "redirect:/admin/userView";
 		

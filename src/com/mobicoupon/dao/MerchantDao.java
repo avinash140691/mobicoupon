@@ -18,4 +18,12 @@ public interface MerchantDao {
 	public int deleteMerchant(String merchantId);
 	
 	public List<MerchantBean4Edit> PartOfView();
+	
+	public int mobileView(String mobile);
+	
+	public int landlLineView(String landline);
+	
+	public int emailView(String email);
+	
+	public int personalContactView(String personalContactNum);
  }
