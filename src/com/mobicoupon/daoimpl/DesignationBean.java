@@ -22,4 +22,13 @@ public class DesignationBean {
 	public void setDesgName(String desgName) {
 		this.desgName = desgName;
 	}
+	
+	@Override
+	public String toString() {
+		
+		return "<Designation>"
+				+ "<desgId>"+desgId+"</desgId>"
+				+ "<desgName>"+desgName+"</desgName>"
+			   +"</Designation>";
+	}
 }

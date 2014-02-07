@@ -1,4 +1,5 @@
 .tableclass {
+	width: 100%;
 	border-collapse: collapse ;
 }
 
@@ -20,4 +21,8 @@
 .tableclass th {
 	border:1px solid #DD2F2F;
 	padding: 3px;
+}
+
+.tableclass select {
+	width:240px;
 }

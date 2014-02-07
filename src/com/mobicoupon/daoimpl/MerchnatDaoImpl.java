@@ -77,7 +77,7 @@ public class MerchnatDaoImpl implements MerchantDao {
 	@Override
 	public int editMerchant(MerchantBean4Edit merchantBean) {
 		
-		int merchantId = merchantBean.getMerchantId();
+		String merchantId = merchantBean.getMerchantId();
 		String merchantName = merchantBean.getMerchantName();  
 		String companyName = merchantBean.getCompanyName();  
 		String address = merchantBean.getAddress(); 
@@ -117,7 +117,7 @@ public class MerchnatDaoImpl implements MerchantDao {
 	}
 
 	@Override
-	public List<DdmBean> viewMerchant(int merchantId) {
+	public List<DdmBean> viewMerchant(String merchantId) {
 		
 		String merchantViewQuery = "select merchant.merchant_id, merchant.merchant_name, merchant.address, designation.desg_id, designation.desg_name, merchant.landline, department.dept_id, department.dept_name, "
 								 +		"merchant.corporate_email_id, merchant.website, merchant.company_name, merchant.mobile, merchant.personal_contact_num, "
@@ -222,7 +222,7 @@ public class MerchnatDaoImpl implements MerchantDao {
 			public MerchantBean4Edit mapRow(ResultSet rs, int row) throws SQLException {
 				
 				MerchantBean4Edit mbe = new MerchantBean4Edit();
-				mbe.setMerchantId(rs.getInt("merchant_id"));
+				mbe.setMerchantId(rs.getString("merchant_id"));
 				mbe.setMerchantName(rs.getString("merchant_name"));
 				mbe.setCompanyName(rs.getString("company_name"));
 				mbe.setMobile(rs.getString("mobile"));
@@ -304,9 +304,9 @@ public class MerchnatDaoImpl implements MerchantDao {
 	@Override
 	public int personalContactView(String personalContactNum) {
 		
-		String pcQuery = "select personal_contact_num from merchant";
+		String pcQuery = "select count(*) from merchant  where personal_contact_num = ? ";
 		
-		Integer count = jdbcTemplate.query(pcQuery,new ResultSetExtractor<Integer>(){
+		Integer count = jdbcTemplate.query(pcQuery,new Object[]{personalContactNum},new ResultSetExtractor<Integer>(){
 
 			@Override
 			public Integer extractData(ResultSet rs) throws SQLException,DataAccessException {
@@ -320,6 +320,139 @@ public class MerchnatDaoImpl implements MerchantDao {
 		});
 		return count;
 	}
+
+	@Override
+	public int mobileUpdateView(String merchantId, String mobile) {
+		
+		String mobileQuery = "select count(*) from merchant where mobile = ? and merchant_id != ?";
+		
+		Integer count = jdbcTemplate.query(mobileQuery, new Object[]{mobile , merchantId}, new ResultSetExtractor<Integer>(){
+
+			@Override
+			public Integer extractData(ResultSet rs) throws SQLException, DataAccessException {
+				if(rs.next())
+					return rs.getInt(1);
+				return -1;
+			}
+			
+		});
+		return count.intValue();
+	}
+
+	@Override
+	public int landLineUpdateView(String merchantId, String landLine) {
+		String landlineQuery = "select count(*) from merchant where landline= ? and merchant_id != ?";
+		
+		Integer count = jdbcTemplate.query(landlineQuery,new Object[]{landLine ,merchantId},new ResultSetExtractor<Integer>(){
+
+			@Override
+			public Integer extractData(ResultSet rs) throws SQLException,DataAccessException {
+				
+				if(rs.next())
+					return rs.getInt(1);
+				
+				return -1;
+			}
+			
+		});
+		
+		return count.intValue();
+
+	}
+
+	@Override
+	public int emailUpdateView(String merchantId, String email) {
+		String emailQuery = "select count(*) from merchant where corporate_email_id = ? and merchant_id != ?";
+		
+		Integer count = jdbcTemplate.query(emailQuery,new Object[]{email,merchantId},new ResultSetExtractor<Integer>(){
+
+			@Override
+			public Integer extractData(ResultSet rs) throws SQLException,DataAccessException {
+			
+				if(rs.next())
+					return rs.getInt(1);
+			
+				return -1;
+			}
+		
+	});
+	
+	return count.intValue();
+
+	}
+
+	@Override
+	public int personalContactUpdateView(String merchantId,String personalContactNum) {
+		
+		String pcQuery = "select personal_contact_num from merchant where personal_contact_num = ? and merchant_id != ? ";
+		
+		Integer count = jdbcTemplate.query(pcQuery, new Object[]{personalContactNum,merchantId},new ResultSetExtractor<Integer>(){
+
+			@Override
+			public Integer extractData(ResultSet rs) throws SQLException,DataAccessException {
+				
+				if(rs.next())
+					return rs.getInt(1);
+				
+				return -1;
+			}
+			
+		});
+		return count;
+	}
+
+	@Override
+	public List<MerchantBean4Edit> viewMerchant() {
+		String partOfViewQuery = "select "
+							+		"merchant_id,merchant_name,address,company_name,department.dept_id,designation.desg_id,desg_name, "
+							+		"corporate_email_id,landline,mobile,personal_contact_num,website, "
+							+		"login.id,username,password,authority " 
+							+	"from   "
+							+ 		"merchant " 
+							+	"left join "  
+							+		"login " 
+							+	"on "  
+							+		"merchant.merchant_id = login.id " 
+							+	"left join "  
+							+		"department "
+							+	"on "    
+							+		"merchant.dept_id = department.dept_id "  
+							+	"left join " 
+							+		"designation " 
+							+	"on " 
+							+		"merchant.desg_id = designation.desg_id ";
+
+				List<MerchantBean4Edit> merchantBean = jdbcTemplate.query(partOfViewQuery,new RowMapper<MerchantBean4Edit>(){
+				
+					@Override
+					public MerchantBean4Edit mapRow(ResultSet rs, int row) throws SQLException {
+					
+						MerchantBean4Edit mbe = new MerchantBean4Edit();
+						
+						mbe.setMerchantId(rs.getString("merchant_id"));
+						mbe.setMerchantName(rs.getString("merchant_name"));
+						mbe.setAddress(rs.getString("address"));
+						mbe.setCompanyName(rs.getString("company_name"));
+						mbe.setDesgId(rs.getInt("desg_id"));
+						mbe.setDesgName(rs.getString("desg_name"));
+						mbe.setDeptId(rs.getInt("dept_id"));
+						mbe.setDeptName(rs.getString("desg_name"));
+						mbe.setCorporateEmailId(rs.getString("corporate_email_id"));
+						mbe.setMobile(rs.getString("mobile"));
+						mbe.setPersonalContactNum(rs.getString("personal_contact_num"));
+						mbe.setWebsite(rs.getString("website"));
+						mbe.setId(rs.getString("id"));
+						mbe.setUserName(rs.getString("username"));
+						mbe.setPassword(rs.getString("password"));
+						mbe.setAuthority(rs.getString("authority"));
+						
+						return mbe;
+					} 
+					
+					});
+				
+				return merchantBean;
+			}
 
 
 

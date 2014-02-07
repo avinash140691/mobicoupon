@@ -20,5 +20,14 @@ public class ProductBean {
 	public void setProductName(String productName) {
 		this.productName = productName;
 	}
+	
+	@Override
+	public String toString() {
+		
+		return "<Product>"
+					+ "<productId>"+productId+"</productId>"
+					+ "<productName>"+productName+"</productName>"
+			   + "</Product>";
+	}
 
 }

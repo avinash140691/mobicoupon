@@ -2,7 +2,7 @@ package com.mobicoupon.services;
 
  
   
- import java.util.List;
+  import java.util.List;
 
 import javax.validation.Valid;
 
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mobicoupon.bean.DdmBean;
@@ -101,7 +102,7 @@ public class MerChantController {
 	public String updateMerchnat(@ModelAttribute("updateForm") @Valid MerchantBean4Edit merchantBean , BindingResult result, Model model
 			, RedirectAttributes rtAttributes){
 		
-		int merchantId = merchantBean.getMerchantId();
+		String merchantId = merchantBean.getMerchantId();
 		
 		if(result.hasErrors()){
 			
@@ -115,6 +116,50 @@ public class MerChantController {
 			model.addAttribute("departments",departments);
 			model.addAttribute("viewDesignations", viewDesignations);
 			model.addAttribute("updateFormErrors", fieldErrors);
+			
+			return "merchantEdit";
+		}
+		  
+		String merchantId2 = merchantBean.getMerchantId();  
+		String landLine = merchantBean.getLandLine();  
+		String mobile = merchantBean.getMobile();      
+		String corporateEmailId = merchantBean.getCorporateEmailId();  
+		String personalContactNum = merchantBean.getPersonalContactNum();  
+		boolean isError =false;
+		
+		int emailView = merchantDao.emailUpdateView(merchantId2, corporateEmailId);  
+		if(emailView >= 1){
+			isError = true;
+			model.addAttribute("emailError", "Choose another email Id " + corporateEmailId  +" already exist");
+		}
+		
+		int landLineView = merchantDao.landLineUpdateView(merchantId2, landLine);  
+		if(landLineView >= 1){
+			isError = true;
+			model.addAttribute("landLineError", "Choose another Phone num "+ landLine +" already exist");
+		}
+		
+		int mobileView = merchantDao.mobileUpdateView(merchantId2, mobile);   
+		if(mobileView >= 1){
+			isError = true;
+			model.addAttribute("mobileError", "Choose another Phone num "+mobile +" already exist");
+		}
+		
+		int personalContactView = merchantDao.personalContactUpdateView(merchantId2, personalContactNum); 
+		if(personalContactView >= 1){
+			isError = true;
+			model.addAttribute("pContactError", "Choose another Phone num "+ personalContactNum  +" already exist");
+		}
+		
+		if(isError){
+			
+			List<DdmBean> viewMerchant = merchantDao.viewMerchant(merchantId);  
+			List<DepartmentBean> departments = departmentDao.getDepartments();  
+			List<DesignationBean> viewDesignations = designationDao.viewDesignations();
+			
+			model.addAttribute("viewMerchant",viewMerchant);
+			model.addAttribute("departments",departments);
+			model.addAttribute("viewDesignations", viewDesignations);
 			
 			return "merchantEdit";
 		}
@@ -141,9 +186,9 @@ public class MerChantController {
 	
 	
 	@RequestMapping(value = "/admin/viewMerchant" , method = RequestMethod.GET)
-	public String viewMerChant(@RequestParam("merchantId") int merchantId,Model model,RedirectAttributes rtAttribute){
+	public String viewMerChant(@RequestParam("merchantId") String merchantId,Model model,RedirectAttributes rtAttribute){
 		
-		if(merchantId == 0){
+		if(merchantId == ""){
 			
 			rtAttribute.addFlashAttribute("error", "Enter MerchantId");
 			return "redirect:/admin/partOfView";
@@ -167,7 +212,7 @@ public class MerChantController {
 	public String deleteMerchant(@RequestParam("merchantId") String merchantId , Model model){
 		
 		if(merchantId == ""){
-			
+ 			
 			model.addAttribute("deleteErrors", "Enter MerchantID");
 			return "redirect:/admin/partOfView";
 		}
@@ -197,9 +242,10 @@ public class MerChantController {
 		model.addAttribute("partOfView", partOfView);
 		return "partOfView";
 	}
+
 	
 	@RequestMapping(value="/admin/editMerchant" , method = RequestMethod.GET)
-	public String editMerchant(@RequestParam("merchantId") int merchantId ,Model model,RedirectAttributes rtAttributes){
+	public String editMerchant(@RequestParam("merchantId") String merchantId ,Model model,RedirectAttributes rtAttributes){
 		
 		List<DdmBean> viewMerchant = merchantDao.viewMerchant(merchantId);  
 		List<DepartmentBean> departments = departmentDao.getDepartments();  
@@ -241,4 +287,21 @@ public class MerChantController {
 		return "merchantAdd";
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/admin/merchant/xml/view" , method = RequestMethod.GET,produces = "application/xml")
+	public String viewOfXmlView(Model model){
+		
+		List<MerchantBean4Edit> partOfView = merchantDao.viewMerchant();
+		
+		String xml = "<merchants>";
+		
+		for (MerchantBean4Edit merchantBean4Edit : partOfView) {  
+			xml += merchantBean4Edit;
+		}
+		
+		xml += "</merchants>";
+		
+		return xml; 
+		
+	}
 }

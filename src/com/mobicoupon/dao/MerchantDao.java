@@ -13,7 +13,9 @@ public interface MerchantDao {
 	
 	public int editMerchant(MerchantBean4Edit merchantBean);
 	
-	public List<DdmBean> viewMerchant(int merchantId);
+	public List<DdmBean> viewMerchant(String merchantId);
+	
+	public List<MerchantBean4Edit> viewMerchant();
 	
 	public int deleteMerchant(String merchantId);
 	
@@ -26,4 +28,13 @@ public interface MerchantDao {
 	public int emailView(String email);
 	
 	public int personalContactView(String personalContactNum);
+	
+	public int mobileUpdateView(String merchantId , String mobile);
+	
+	public int landLineUpdateView(String merchantId , String landLine);
+	
+	public int emailUpdateView(String merchantId, String email);
+	
+	public int personalContactUpdateView(String merchantId , String personalContactNum);
+	
  }

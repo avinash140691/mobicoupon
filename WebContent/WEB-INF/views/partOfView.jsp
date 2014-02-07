@@ -23,7 +23,7 @@
 				<div class="d_form">
 					<table class="tableclass">
 						<tr>
-							<td align="right" colspan="7">
+							<td align="right" colspan="10">
 							<a href='<c:url value="/admin/add"></c:url>'>+Merchant</a>
 							</td>
 						</tr>
@@ -44,10 +44,10 @@
 								<td>${list.corporateEmailId}</td>
 								<td>${list.authority}</td>
 								<td>${list.companyName}</td>
-								<td><a href='<c:url value="/admin/editMerchant?merchantId=${list.merchantId}"></c:url>' style="color:green">EDIT</a>
+								<td><a href='<c:url value="/admin/editMerchant?merchantId=${list.merchantId}"></c:url>' style="color:green">Edit</a>
 									<a href='<c:url value="/admin/viewMerchant?merchantId=${list.merchantId}"></c:url>' style="color:green">View</a>
 									<a href='<c:url value="/admin/deleteMerchant?merchantId=${list.merchantId}">
-									</c:url>'style="color:red">DELETE</a>
+									</c:url>'style="color:red">Delete</a>
 									
 									</td>
 							</tr>

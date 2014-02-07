@@ -67,7 +67,7 @@
 						<li class="subdowns3 vusers"><a style="color: #FFF;"
 							href='<c:url value="/admin/userView"></c:url>'>View Users</a></li>
 						<li class="subdowns3 cusers"><a style="color: #FFF;"
-							href="adminuserCreation.jsp">Create Users</a></li>
+							href='<c:url value="/admin/userView"></c:url>'>Create Users</a></li>
 					</ul></li>
 			</ul>
 		</div>

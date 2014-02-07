@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mobicoupon.bean.UserBean;
@@ -75,6 +76,22 @@ public class UserController {
 		model.addAttribute("list",view);
 
 		return "user";
+			
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/admin/user/xml/view" , method = RequestMethod.GET, produces = "application/xml")
+	public String xmlView(Model model){
+		
+		List<UserEditBean> view = userDao.view();
+		
+		String xml = "<users>";
+		for (UserEditBean userEditBean : view) {
+			xml += userEditBean;	// xml = xml + userEditBean.toString();
+		}
+		xml += "</users>";
+
+		return xml;
 			
 	}
 	

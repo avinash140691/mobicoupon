@@ -85,5 +85,14 @@ public class UserBean {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	
+	@Override
+	public String toString() {
+		return "<user>" +
+					"<name>" + name + "</name>" +
+					"<company>" + company + "</company>" +
+				"</user>";
+	}
 
 }

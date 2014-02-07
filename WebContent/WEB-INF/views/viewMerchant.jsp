@@ -79,7 +79,7 @@
 								<td>${list.merchantBean.personalContactNum}</td>
 							</tr>
 							<tr>
-								<td colspan="2" align="right" style="color:green">
+								<td colspan="2" align="center" style="color:green">
 								<a href='<c:url value="/admin/editMerchant?merchantId=${list.merchantBean.merchantId}"></c:url>'>EDIT</a>
 								</td>
 							</tr>

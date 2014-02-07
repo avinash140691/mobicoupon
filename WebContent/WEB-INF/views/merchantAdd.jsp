@@ -5,7 +5,7 @@
 		<title>MERCHANT ADD FORM</title>
 		<script src='<c:url value="/web/js/jquery.min.js"></c:url>'></script>
 		<link href='<c:url value="/web/css/style.css"></c:url>' rel="stylesheet" type="text/css" />
-		
+		<link href='<c:url value="/web/css/mstyles.css"></c:url>' rel="stylesheet" type="text/css"/>
 		<script type="text/javascript">
 			
 			$(document).ready(function(){
@@ -53,7 +53,7 @@
 			<div class="d_form">
 				<form action='<c:url value="/admin/addMerchant"></c:url>' name="merchantAddForm" id="merchantAddForm" 
 				method="post">
-					<table>
+					<table id="tableclass" class="tableclass">
 						
 						<tr>
 							<td>Name</td>
@@ -127,7 +127,7 @@
 						<tr>
 							<td>Authority</td>
 							<td>
-								<select id="authority" name="authority">
+								<select id="authority" name="authority" >
 									<option value="" selected>select</option>
 									<option value="ROLE_MERCHANT">MERCHANT</option>
 								</select>
@@ -141,7 +141,7 @@
 						
 						<tr>
 							<td  align="right"><input type="submit" value="Submit" /></td>
-							<td colspan="2" align="right"><input type="reset" />  </td>
+							<td colspan="2" align="left"><input type="reset"  />  </td>
 						</tr>
 						
 					

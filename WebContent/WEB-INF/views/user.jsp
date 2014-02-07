@@ -88,7 +88,7 @@
 				<div id="user" class="user">
 					<table class="tableclass" id="tableclass">
 						<tr>
-							<td colspan="9" align="right">
+							<td colspan="10" align="right">
 								<input type="button" id="addUser" value="+User" />
 							</td>
 						</tr>
@@ -112,8 +112,8 @@
 								<td>${list.mobile}</td>
 								<td>${list.userName}</td>
 								<td>${list.password}</td>
-								<td><a href='<c:url value="/admin/deleteUser?id=${list.id}"></c:url>'>DELETE</a></td>
-								<td><input type="button" value="EDIT" id="editButton" class="editButton"/></td>
+								<td><a href='<c:url value="/admin/deleteUser?id=${list.id}"></c:url>'>Delete</a></td>
+								<td><input type="button" value="Edit" id="editButton" class="editButton"/></td>
 							</tr>	
 						</c:forEach>	
 					</table>	

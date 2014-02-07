@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mobicoupon.dao.DepartmentDao;
@@ -70,5 +71,21 @@ public class AdminController {
 		departmentDao.removeDept(id);
 		return "redirect:/admin/department";
 	}
-
+	
+	@ResponseBody
+	@RequestMapping(value="/admin/dept/xml/view" , method = RequestMethod.GET, produces = "application/xml")
+	public String ViewDept(){
+		
+		List<DepartmentBean> departments = departmentDao.getDepartments();  
+		
+		String xml = "<Department>";
+		
+		for (DepartmentBean departmentBean : departments) {
+			xml += departmentBean;
+		}
+		
+		xml += "</Department>";
+		
+		return xml;
+	}
 }

@@ -57,6 +57,17 @@ public class SubSubProductBean {
 		this.subSubProductName = subSubProductName;
 	}
 	
+	@Override
+	public String toString() {
+		return "<SubSubProduct>"
+				+ "<productId>"+productId+"</productId>"
+				+ "<productName>"+ProductName+"</productName>"
+				+ "<subProductId>"+subProductId+"</subProductId>"
+				+ "<subProductName>"+subProductName+"</subProductName>"
+				+ "<subSubProductId>"+subSubProductId+"</subSubProductId>"
+				+ "<subSubProductName>"+subSubProductName+"</subSubProductName>"
+			+ "</SubSubProduct>";
+	}
 	
 	
 }

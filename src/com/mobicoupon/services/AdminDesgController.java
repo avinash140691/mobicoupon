@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mobicoupon.dao.DesignationDao;
@@ -66,4 +67,19 @@ public class AdminDesgController {
 		designationDao.deleteDesignation(id);
 		return "redirect:/admin/designation";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="/admin/desg/xml/view" , method = RequestMethod.GET , produces="application/xml")
+	public String desgXmlView(){
+		
+		List<DesignationBean> designation = designationDao.viewDesignations();
+		String xml = "<Designations>";
+		for (DesignationBean designationBean : designation) {
+			xml += designationBean; 
+		}
+		xml += "</Designations>";
+		
+		return xml;
+	}
+	
 }

@@ -87,5 +87,20 @@ public class UserEditBean {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	
+	@Override
+	public String toString() {
+		return "<user>" +
+					"<id>"+id+"</id>"+
+					"<name>"+ name+"</name>" +
+					"<company>"+company+"</company>" +
+					"<designation>"+designation +"</designation>"+
+					"<email>"+email+"</email>"+
+					"<mobile>"+mobile+"</mobile>"+
+					"<username>"+userName+"</username>"+
+					"<password>"+password+"</password>"+
+				"</user>";
+	}
 
 }

@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mobicoupon.dao.ProductDao;
@@ -86,5 +87,20 @@ public class AdminProductController {
 		List<ProductBean> list = productDao.viewProduct();
 		model.addAttribute("list", list);
 		return "viewProduct";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/admin/Product/xml/view", method = RequestMethod.GET , produces = "application/xml")
+	public String viewXMLProduct(Model model){
+		
+		List<ProductBean> list = productDao.viewProduct();
+		String xml = "<Products>";
+		
+		for (ProductBean productBean : list) {
+			xml += productBean;
+		}
+		xml += "</Products>";
+		
+		return xml;
 	}
 }

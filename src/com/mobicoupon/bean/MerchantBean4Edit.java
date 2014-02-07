@@ -7,8 +7,8 @@ import org.hibernate.validator.constraints.NotBlank;
 public class MerchantBean4Edit {
 	
 	
-	@Min(1)
-	private int merchantId;
+	@NotBlank
+	private String merchantId;
 	@NotBlank
 	private String merchantName;
 	@NotBlank
@@ -37,6 +37,8 @@ public class MerchantBean4Edit {
 	private String authority;
 	
 	private String id;
+	private String deptName;
+	private String desgName;
 	
 	
 
@@ -48,11 +50,11 @@ public class MerchantBean4Edit {
 		this.id = id;
 	}
 
-	public int getMerchantId() {
+	public String getMerchantId() {
 		return merchantId;
 	}
 
-	public void setMerchantId(int merchantId) {
+	public void setMerchantId(String merchantId) {
 		this.merchantId = merchantId;
 	}
 
@@ -158,6 +160,45 @@ public class MerchantBean4Edit {
 
 	public void setAuthority(String authority) {
 		this.authority = authority;
+	}
+
+	public String getDeptName() {
+		return deptName;
+	}
+
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
+	}
+
+	public String getDesgName() {
+		return desgName;
+	}
+
+	public void setDesgName(String desgName) {
+		this.desgName = desgName;
+	}
+	
+	@Override
+	public String toString() {
+		return "<merchant> "
+					+ "<merchantId>"+merchantId+"</merchantId>"
+					+ "<merchantName>"+merchantName +"</merchantName>"
+					+ "<address>"+address+"</address>"
+					+ "<companyName>"+companyName+"</companyName>"
+					+ "<desgId>"+desgId+"</desgId>"
+					+ "<desgName>"+desgName+"</desgName>"
+					+ "<deptId>"+deptId+"</deptId>"
+					+ "<deptName>"+deptName+"</deptName>"
+					+ "<corporateEmailId>"+corporateEmailId+"</corporateEmailId>"
+					+ "<landLine>"+landLine+"</landLine>"
+					+ "<mobile>"+mobile+"</mobile>"
+					+ "<website>"+website+"</website>"
+					+ "<personalContactNum>"+personalContactNum+"</personalContactNum>"
+					+"<id>"+id+"</id>"
+					+ "<userName>"+userName+"</userName>"
+					+ "<password>"+password+"</password>"
+					+ "<authority>"+authority+"</authority>"
+				+ "</merchant>";
 	}
 
 }

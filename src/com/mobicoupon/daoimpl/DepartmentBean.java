@@ -25,5 +25,13 @@ public class DepartmentBean {
 	public void setDeptName(String deptName) {
 		this.deptName = deptName;
 	}
+	
+	@Override
+	public String toString() {
+		return  "<Dept>"
+					+ "<deptId>"+deptId+"</deptId>"
+					+ "<deptName>"+deptName+"</deptName>"
+				+ "</Dept>";
+	}
 
 }

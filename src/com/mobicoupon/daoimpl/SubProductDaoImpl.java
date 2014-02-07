@@ -42,10 +42,17 @@ public class SubProductDaoImpl implements SubProductDao {
 
 	@Override
 	public List<SubProductBean> viewSubProduct() {
+		
 		String query = "select product.product_id, product.product_name,sub_product.sub_product_id,"
-				+ "sub_product.sub_product_name from product left join sub_product  on "
-				+ "product.product_id = sub_product.product_id";
-		 List<SubProductBean> query2 = template.query(query,new RowMapper<SubProductBean>(){
+						+ 	"sub_product.sub_product_name "
+						+ "from "
+						+ 	"product "
+						+ "left join "
+						+ 	"sub_product "
+						+ " on "
+						+ 	"product.product_id = sub_product.product_id ";
+		
+		List<SubProductBean> query2 = template.query(query,new RowMapper<SubProductBean>(){
 
 			@Override
 			public SubProductBean mapRow(ResultSet rs, int arg1)

@@ -122,4 +122,24 @@ public class AdminSubProductController {
 		return data;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value=("/admin/subProduct/xml/view") ,method = RequestMethod.GET , produces = "application/xml")
+	public String xmlViewSubProduct(Model model){
+		
+		List<SubProductBean> list = subProductDao.viewSubProduct();
+		
+		String xml = "<SubProducts>";
+		
+		for (SubProductBean subProductBean : list) { 
+			
+			xml += subProductBean;
+			
+		}
+		
+		xml += "</SubProducts>";
+		
+		return xml; 
+		
+	}
+	
 }
